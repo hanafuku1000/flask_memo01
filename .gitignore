@@ -9,6 +9,7 @@
 !templates/
 !templates/**
 
+
 # ただし特定ファイルだけは無視する（再度除外）
 templates/index_*.html
 templates/app_*.html
