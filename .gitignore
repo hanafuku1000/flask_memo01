@@ -11,8 +11,14 @@
 !static/
 !static/**
 
+!flaskmemo.db 
+#レンダーの仕様で初回時DBが作られずエラーが出ることがある。
+#また同じく、レンダー（無料）の仕様で、毎回データが飛ぶので、メモアプリとしては致命的な問題がある…
+
+
 # ただし特定ファイルだけは無視する（再度除外）
 templates/index_*.html
 templates/app_*.html
 templates/delete.html
+
 
