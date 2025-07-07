@@ -8,7 +8,7 @@
 !app.py
 !templates/
 !templates/**
-
+!static/**
 
 # ただし特定ファイルだけは無視する（再度除外）
 templates/index_*.html
