@@ -1,0 +1,62 @@
+
+<!--base.htmlを読込む
+・base.htmlはテンプレートである。index.htmlの<html>としての基礎テンプレートタグを有している
+・index.htmlはbase.htmlを継承し、{block content}の部分を入れ替えていく
+・なお、[block content]の名は自由に決めた変数名である（予約語 等ではない）
+-->
+
+<!--
+ちなみに、このタグがhtmlで唯一認められたコメントのタグです-->
+<!--base.htmlを読込む-->
+{% extends "base.html" %} 
+
+{% block content %}
+<h1>メモアプリ</h1>
+    <a href ="/regist" role ="button" class="btn btn-primary">新規登録</a> 
+    <a href ="/logout" role ="button" class="btn btn-primary">ログアウト</a> 
+    <p>
+    
+
+    <!--flaskでは拡張子はいらない：regist.htmlはregistだけでOK-->
+
+    {% if memo_lists == [] %}
+        <p>登録φ(..)メモはありません</p>
+    
+    {% else %}
+        <table class="table table-bordered"> <!--Bootstrap流に枠付きテーブルにする-->
+            
+            {% for memo_list in memo_lists %}    
+                
+                <tr>
+                    <td>
+                        <div style="background-color: #fff3cd; font-weight: bold; padding: 4px;">
+                            📌{{memo_list.title}}<br>
+                        </div>
+                        <!--改行を反映しない→{{memo_list.body}}ので、改行を反映するよう、下記に書き換えた-->
+                        <p></p>{{ memo_list.body | replace('\n', '<br>') | safe }}
+                    </td>
+                    <td>
+                        <!--idごとに違うURLを設定する -->
+                        <a href = "/{{memo_list.id}}/edit" role = "button" class="btn btn-outline-primary" >編集</a>
+                    </td>
+                    <td>
+                        <!--idごとに違うURLを設定する -->
+                        <!--　更新のように別のサイトへ移動して、削除を確定させるver(別サイトを表示させるときはGETメソッドが走る。参考：削除を確定させるbtnを押したときはPOST)
+                            <a href = "/{{memo_list.id}}/delete" role = "button">削除</a>
+                        -->
+                        <!--formタグにJavaScript（onsubmit="return confirm('本当に削除しますか？')）を噛ませて、削除を確定させるか確認する 
+                        また、action（POSTの送信先指定）の属性は今回は必須。編集画面などでは、実際にページ移動しているのでそのURLを利用すればよかったが、
+                        今回（削除）はindex.htmlから移動せずにJavaScriptを利用して削除しようとしているので、そのまま削除すると狙ったデータを削除できない
+                        -->
+                        <form method="POST" action="/{{ memo_list.id }}/delete" onsubmit="return confirm('タイトル：{{ memo_list.title }} を本当に削除しますか？');">
+                            <button type="submit" class="btn btn-outline-secondary">削除</button>
+                        </form>
+
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock %}

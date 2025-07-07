@@ -1,0 +1,52 @@
+
+<!--base.htmlを読込む
+・base.htmlはテンプレートである。index.htmlの<html>としての基礎テンプレートタグを有している
+・index.htmlはbase.htmlを継承し、{block content}の部分を入れ替えていく
+・なお、[block content]の名は自由に決めた変数名である（予約語 等ではない）
+-->
+
+<!--
+ちなみに、このタグがhtmlで唯一認められたコメントのタグです-->
+<!--base.htmlを読込む-->
+{% extends "base.html" %} 
+
+{% block content %}
+<h1>ログイン画面</h1>
+
+<!--エラーメッセージ部分-->
+<p style ="color:red">{{error_message}}</p>
+
+
+<!--ログインフォーム-->
+<form method ="POST">
+    <table border = 1 style = "width :50%">
+        <tr>
+        <th>📌ユーザID</th>
+        <th>📝パスワード</th>
+       
+        
+        </tr>
+        <tr>
+            <td>
+                <input type ="text" name = "userid" value = "{{userid}}">
+            </td>
+            <td>
+                <input type="password" name="password" style="width: 95%;">
+                <br>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type = "submit" value ="ログイン" class="btn btn-primary">
+                <a href = "/signup" role = "button" class="btn btn-primary">新規ユーザ登録</a>
+            </td>
+            <td style="text-align: right;"></td>
+        </tr>
+    </table>
+    
+    
+</form>
+
+
+{% endblock %}

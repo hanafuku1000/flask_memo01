@@ -1,0 +1,16 @@
+# すべて無視
+*
+
+# 必要なファイルとフォルダを許可
+!.gitignore
+!requirements.txt
+!Procfile
+!app.py
+!templates/
+!templates/**
+
+# ただし特定ファイルだけは無視する（再度除外）
+templates/index_*.html
+templates/app_*.html
+templates/delete.html
+

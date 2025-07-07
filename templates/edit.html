@@ -1,0 +1,44 @@
+
+<!--base.htmlを読込む
+・base.htmlはテンプレートである。index.htmlの<html>としての基礎テンプレートタグを有している
+・index.htmlはbase.htmlを継承し、{block content}の部分を入れ替えていく
+・なお、[block content]の名は自由に決めた変数名である（予約語 等ではない）
+-->
+
+<!--
+ちなみに、このタグがhtmlで唯一認められたコメントのタグです-->
+<!--base.htmlを読込む-->
+{% extends "base.html" %} 
+
+{% block content %}
+<h1>編集画面</h1>
+<form method ="POST">
+    <table border = 1>
+        <tr>
+            <td>📌タイトル</td>
+        </tr>
+        <tr>
+            <td>
+            <!--元々入っていた値を、初期値(value)として表示 -->
+            <input type ="text" name = "title" value = "{{post.title}}">
+            </td>
+              
+        </tr>
+        <tr>
+            <td>📝メモ内容</td>
+        </tr>
+        <tr>
+            <td>
+                <!--input type="text" name="body" value ="{{post.body}}" style="width: 90%;"-->
+                <textarea name="body" style="width: 90%;" rows="4">{{ post.body }}</textarea>
+
+                <br>
+                <input type = "submit" value ="編集登録" class="btn btn-primary">
+            </td>
+        
+        </tr>
+    </table>
+    
+</form>
+<a href = "/" role="button">一覧に戻る</a>
+{% endblock %}
