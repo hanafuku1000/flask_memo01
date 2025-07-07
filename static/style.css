@@ -1,0 +1,28 @@
+
+/*
+html側で
+<div class="base-html"></div>と記入することで、下記を適用できる
+
+.base-html {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+*/
+
+body {
+  margin: 20px !important; /* bootstrapよりも優先する */
+}
+
+
+table {
+    width: 80%;
+    border-collapse: collapse;  /* ← これがポイント！ */
+    border: 1px solid #999;
+}
+
+th, td {
+    border: 1px solid #999;
+    padding: 10px;
+    text-align: left;
+}
